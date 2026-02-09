@@ -3,7 +3,7 @@
 Next.js(App Router) + TypeScript + Tailwind로 구현하는 단일 앱입니다.  
 목표는 "할 일 입력 -> 3초 준비 -> 3단계 실행 -> 완료 축하" 흐름을 빠르게 제공하는 것입니다.
 
-## Quickstart
+## 실행 방법
 
 ```bash
 cd apps/miruny
@@ -13,7 +13,7 @@ npm run dev
 
 브라우저에서 `http://localhost:3000`을 엽니다.
 
-## Commands
+## 주요 명령어
 
 ```bash
 cd apps/miruny
@@ -23,9 +23,21 @@ npm run start
 npm run lint
 ```
 
-`typecheck`, `test` 스크립트는 구현 단계에서 `package.json`에 추가합니다.
+## 현재 구현 플로우
 
-## Planned Project Structure
+1. `/` Landing에서 작업 입력 및 Todo 관리
+2. `지금 바로 시작` 또는 Enter로 `currentRun` 생성 후 `/prepare` 이동
+3. `/prepare`에서 `3 -> 2 -> 1` 카운트다운 후 `/run` 이동
+4. `/run`에서 단계 진행/재시작/재생성 및 타이머 진행
+5. 3단계 완료 시 `/done` 이동
+6. `/done`에서 confetti + 완료 요약 확인 후 `1단계부터 다시 시작`
+
+## localStorage
+
+- `miruny.tasks`: 랜딩 Todo 목록
+- `miruny.currentRun`: 실행 세션(단계/타이머/완료 정보)
+
+## 프로젝트 구조
 
 ```text
 apps/miruny/
@@ -34,12 +46,13 @@ apps/miruny/
     prepare/page.tsx        # 3-2-1 countdown
     run/page.tsx            # 3-step run + timer
     done/page.tsx           # confetti + summary
-    api/chunk/route.ts      # optional LLM step generation
   components/
     InputCard.tsx
     TodoList.tsx
     StepCard.tsx
     TimerRing.tsx
+    DoneRing.tsx
+    ConfettiBurst.tsx
   lib/
     types.ts
     storage.ts
@@ -47,25 +60,7 @@ apps/miruny/
     timer.ts
 ```
 
-## Key UX Flow
+## 개발 중 이슈 메모
 
-1. Landing(`/`)에서 작업 텍스트를 입력한다.
-2. `지금 바로 시작` 또는 Enter로 `CurrentRun`을 생성하고 `/prepare`로 이동한다.
-3. `/prepare`에서 3 -> 2 -> 1 카운트다운 후 `/run`으로 자동 이동한다.
-4. `/run`에서 각 단계 타이머를 보며 `다음 단계로` 또는 `완료`로 진행한다.
-5. 3단계 완료 시 `/done`으로 이동하고 confetti 및 총 소요 시간을 보여준다.
-6. `1단계부터 다시 시작`으로 동일 미션을 재시작한다.
-
-## Persistence
-
-- `localStorage` 키
-  - `miruny.tasks`
-  - `miruny.currentRun`
-- 리프레시/백그라운드 이후에도 `Date.now()` 기반으로 타이머가 정확히 복구되어야 합니다.
-
-## MVP Scope Notes
-
-- 외부 DB 없음, 로컬 저장소만 사용.
-- LLM 스텝 생성은 선택 기능:
-  - `OPENAI_API_KEY`가 있으면 `/api/chunk`를 통해 생성 시도
-  - 없거나 실패하면 로컬 휴리스틱(`createThreeSteps`)으로 즉시 fallback
+- Next 템플릿의 `next/font/google` fetch로 오프라인 빌드 실패가 발생해, 외부 폰트 의존성을 제거하고 시스템 폰트 기반으로 전환했습니다.
+- 현재 `npm run build`는 오프라인 환경에서도 통과합니다.

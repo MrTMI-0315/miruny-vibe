@@ -65,12 +65,25 @@
   - 카드 오른쪽 `완료` 버튼
 
 핵심 동작:
-- `다음 단계로` 또는 `완료` 클릭:
-  - 현재 인덱스 완료 처리
-  - 다음 인덱스로 이동
-  - 마지막(3단계) 완료 시 `/done`
-- `1단계부터 다시 시작`:
-  - 진행도 초기화 + 단계 1로 이동 + 타이머 재시작
+- `다시 생성하기` 클릭:
+  - `steps = createThreeSteps(taskText)`로 재생성
+  - `currentStepIndex=0`, `completedStepIndexes=[]`
+  - `totalStartedAt=Date.now()`, `stepStartedAt=Date.now()`
+  - `finishedAt/totalElapsedSec` 제거 후 저장
+- `1단계부터 다시 시작` 클릭:
+  - 기존 steps 유지
+  - `currentStepIndex=0`, `completedStepIndexes=[]`
+  - `stepStartedAt=Date.now()`
+  - `finishedAt/totalElapsedSec` 제거 후 저장
+- `다음 단계로` 또는 현재 카드의 `완료` 클릭:
+  - 현재 step index를 `completedStepIndexes`에 중복 없이 추가
+  - 다음 step이 있으면:
+    - `currentStepIndex += 1`
+    - `stepStartedAt=Date.now()`로 갱신 후 저장
+  - 마지막 step 완료면:
+    - `finishedAt=Date.now()`
+    - `totalElapsedSec=floor((finishedAt-totalStartedAt)/1000)`
+    - 저장 후 `/done`으로 이동
 
 ## `/done`
 
@@ -102,6 +115,8 @@ type CurrentRun = {
   stepStartedAt: number;
   totalStartedAt: number;
   completedStepIndexes: number[];
+  finishedAt?: number;
+  totalElapsedSec?: number;
 };
 ```
 
@@ -196,10 +211,10 @@ v1 휴리스틱:
 
 ## 10) Acceptance Checklist
 
-- [ ] Enter 키로 즉시 시작(Primary 버튼과 동일)
-- [ ] Todo CRUD 동작 + 새로고침 후 유지
-- [ ] `/prepare`에서 3초 카운트다운 후 `/run` 이동
-- [ ] `/run` 타이머가 refresh/background 이후에도 정확
-- [ ] 남은 시간이 3초 이하일 때 `서두르세요!` 표시
-- [ ] 단계 진행이 정확하며 3단계 완료 시 `/done` 이동
-- [ ] `/done`에 confetti와 `{총 소요초} 완료!` 표시
+- [x] Enter 키로 즉시 시작(Primary 버튼과 동일)
+- [x] Todo CRUD 동작 + 새로고침 후 유지
+- [x] `/prepare`에서 3초 카운트다운 후 `/run` 이동
+- [x] `/run` 타이머가 refresh/background 이후에도 정확
+- [x] 남은 시간이 3초 이하일 때 `서두르세요!` 표시
+- [x] 단계 진행이 정확하며 3단계 완료 시 `/done` 이동
+- [x] `/done`에 confetti와 `{총 소요초} 완료!` 표시
