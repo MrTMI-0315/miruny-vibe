@@ -59,7 +59,11 @@ function isCurrentRun(value: unknown): value is CurrentRun {
     typeof candidate.stepStartedAt === "number" &&
     typeof candidate.totalStartedAt === "number" &&
     Array.isArray(candidate.completedStepIndexes) &&
-    candidate.completedStepIndexes.every((index) => typeof index === "number")
+    candidate.completedStepIndexes.every((index) => typeof index === "number") &&
+    (candidate.finishedAt === undefined ||
+      typeof candidate.finishedAt === "number") &&
+    (candidate.totalElapsedSec === undefined ||
+      typeof candidate.totalElapsedSec === "number")
   );
 }
 

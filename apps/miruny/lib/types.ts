@@ -18,4 +18,6 @@ export type CurrentRun = {
   stepStartedAt: number;
   totalStartedAt: number;
   completedStepIndexes: number[];
+  finishedAt?: number;
+  totalElapsedSec?: number;
 };
