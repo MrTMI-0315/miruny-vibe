@@ -6,9 +6,9 @@ Next.js(App Router) + TypeScript + Tailwind로 구현하는 단일 앱입니다.
 ## Quickstart
 
 ```bash
-pnpm create next-app@latest . --ts --tailwind --eslint --app --src-dir false --import-alias "@/*"
-pnpm install
-pnpm dev
+cd apps/miruny
+npm install
+npm run dev
 ```
 
 브라우저에서 `http://localhost:3000`을 엽니다.
@@ -16,12 +16,11 @@ pnpm dev
 ## Commands
 
 ```bash
-pnpm dev
-pnpm build
-pnpm start
-pnpm lint
-pnpm typecheck
-pnpm test
+cd apps/miruny
+npm run dev
+npm run build
+npm run start
+npm run lint
 ```
 
 `typecheck`, `test` 스크립트는 구현 단계에서 `package.json`에 추가합니다.
@@ -29,22 +28,23 @@ pnpm test
 ## Planned Project Structure
 
 ```text
-app/
-  page.tsx                  # Landing
-  prepare/page.tsx          # 3-2-1 countdown
-  run/page.tsx              # 3-step run + timer
-  done/page.tsx             # confetti + summary
-  api/chunk/route.ts        # optional LLM step generation
-components/
-  InputCard.tsx
-  TodoList.tsx
-  StepCard.tsx
-  TimerRing.tsx
-lib/
-  types.ts
-  storage.ts
-  chunking.ts
-  timer.ts
+apps/miruny/
+  app/
+    page.tsx                # Landing
+    prepare/page.tsx        # 3-2-1 countdown
+    run/page.tsx            # 3-step run + timer
+    done/page.tsx           # confetti + summary
+    api/chunk/route.ts      # optional LLM step generation
+  components/
+    InputCard.tsx
+    TodoList.tsx
+    StepCard.tsx
+    TimerRing.tsx
+  lib/
+    types.ts
+    storage.ts
+    chunking.ts
+    timer.ts
 ```
 
 ## Key UX Flow

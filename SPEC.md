@@ -1,5 +1,9 @@
 # MIRUNY 2.1 MVP Specification
 
+## 0) App Location
+
+구현 위치: `apps/miruny` (Next.js App Router 단일 앱)
+
 ## 1) Functional Scope
 
 단일 Next.js 앱에서 아래 4개 화면을 제공한다.
@@ -181,14 +185,14 @@ v1 휴리스틱:
 
 ## 9) File/Module Plan
 
-- `lib/types.ts`: 타입 정의
-- `lib/storage.ts`: 안전한 get/set helper
-- `lib/timer.ts`: 순수 시간 계산 helper
-- `lib/chunking.ts`: 휴리스틱 생성 + API 호출 helper
-- `components/InputCard.tsx`: Landing 입력 카드
-- `components/TodoList.tsx`: 할 일 목록 CRUD UI
-- `components/TimerRing.tsx`: 링 타이머
-- `components/StepCard.tsx`: 단계 카드
+- `apps/miruny/lib/types.ts`: 타입 정의
+- `apps/miruny/lib/storage.ts`: 안전한 get/set helper
+- `apps/miruny/lib/timer.ts`: 순수 시간 계산 helper
+- `apps/miruny/lib/chunking.ts`: 휴리스틱 생성 + API 호출 helper
+- `apps/miruny/components/InputCard.tsx`: Landing 입력 카드
+- `apps/miruny/components/TodoList.tsx`: 할 일 목록 CRUD UI
+- `apps/miruny/components/TimerRing.tsx`: 링 타이머
+- `apps/miruny/components/StepCard.tsx`: 단계 카드
 
 ## 10) Acceptance Checklist
 
