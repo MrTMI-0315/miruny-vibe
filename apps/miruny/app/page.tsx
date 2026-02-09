@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { InputCard } from "@/components/InputCard";
 import { TodoList } from "@/components/TodoList";
-import { loadTasks, saveTasks } from "@/lib/storage";
-import { Task } from "@/lib/types";
+import { createThreeSteps } from "@/lib/chunking";
+import { loadTasks, saveCurrentRun, saveTasks } from "@/lib/storage";
+import { CurrentRun, Task } from "@/lib/types";
 
 function createTask(text: string): Task {
   return {
@@ -16,6 +18,7 @@ function createTask(text: string): Task {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [tasks, setTasks] = useState<Task[]>(() => loadTasks());
 
@@ -45,8 +48,18 @@ export default function HomePage() {
       return;
     }
 
-    // Execution flow (/prepare) will be connected in the next commit.
-    window.alert("실행 플로우(/prepare)는 다음 커밋에서 연결됩니다.");
+    const now = Date.now();
+    const currentRun: CurrentRun = {
+      taskText: task.text,
+      steps: createThreeSteps(task.text),
+      currentStepIndex: 0,
+      stepStartedAt: now,
+      totalStartedAt: now,
+      completedStepIndexes: [],
+    };
+
+    saveCurrentRun(currentRun);
+    router.push("/prepare");
   };
 
   return (
