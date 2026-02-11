@@ -6,7 +6,7 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 ## Routes / Flow
 - `/`: 작업 입력 + Todo 목록 관리 (`지금 바로 시작` 또는 Enter로 실행 시작)
 - `/prepare`: 실행 전 준비 화면(3초 후 자동 이동)
-- `/run`: 단계 진행 화면(재생성/재시작/다음 단계/완료)
+- `/run`: 단계 진행 화면(재생성/재시작/나가기/다음 단계/완료)
 - `/done`: 완료 요약 + confetti + 1단계부터 재시작
 - 전체 흐름: `/ -> /prepare -> /run -> /done`
 
@@ -24,6 +24,7 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 ## Recent Work Snapshot
 - `/prepare`: “작업을 분석하고 있어요...” 톤으로 정렬(브랜드 아이콘 + 실제 로딩 인디케이터 + 3초 이동 유지)
 - `/run`: 상태 배지 3단계, step3 CTA 정책(하단 next 대신 카드 완료 유도), StepCard 상세/힌트, TimerRing “초” 중심 표기 반영
+- `/run`: 헤더에 `처음으로 나가기` 추가(세션 폐기 + `/` replace)로 P0 출구 확보
 - `/` Landing: 이번 라운드 기준 동작 변경 없음(기존 UX/로직 유지)
 - E2E: `landing-to-prepare`, `prepare-positive`, `run-guard-redirect`, `prepare-guard-redirect`, `run-step-advance`, `step3-cta-policy`, `done-guard-redirect`, `done-positive`, `done-restart` 스모크 추가
 
