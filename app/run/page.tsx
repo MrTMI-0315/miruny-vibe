@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { StepCard } from "@/components/StepCard";
 import { TimerRing } from "@/components/TimerRing";
 import { createThreeSteps } from "@/lib/chunking";
-import { loadCurrentRun, saveCurrentRun } from "@/lib/storage";
+import {
+  CURRENT_RUN_STORAGE_KEY,
+  loadCurrentRun,
+  saveCurrentRun,
+} from "@/lib/storage";
 import { CurrentRun } from "@/lib/types";
 import { getProgressRatio, getRemainingSeconds } from "@/lib/timer";
 
@@ -104,6 +108,14 @@ export default function RunPage() {
     persistRun(nextRun);
   };
 
+  const handleExitToLanding = () => {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(CURRENT_RUN_STORAGE_KEY);
+    }
+    setCurrentRun(null);
+    router.replace("/");
+  };
+
   const handleRestartFromFirst = () => {
     if (!currentRun) {
       return;
@@ -180,13 +192,22 @@ export default function RunPage() {
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
             지금 당장 시작하세요!
           </h1>
-          <button
-            type="button"
-            onClick={handleRegenerate}
-            className="text-sm font-semibold text-orange-500 hover:text-orange-600"
-          >
-            다시 생성하기
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={handleExitToLanding}
+              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700"
+            >
+              처음으로 나가기
+            </button>
+            <button
+              type="button"
+              onClick={handleRegenerate}
+              className="text-sm font-semibold text-orange-500 hover:text-orange-600"
+            >
+              다시 생성하기
+            </button>
+          </div>
         </div>
 
         <div className="mt-4 rounded-2xl bg-orange-50 p-4 ring-1 ring-orange-200">
