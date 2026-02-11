@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConfettiBurst } from "@/components/ConfettiBurst";
 import { DoneRing } from "@/components/DoneRing";
-import { loadCurrentRun, saveCurrentRun } from "@/lib/storage";
+import {
+  CURRENT_RUN_STORAGE_KEY,
+  loadCurrentRun,
+  saveCurrentRun,
+} from "@/lib/storage";
 import { CurrentRun } from "@/lib/types";
 
 export default function DonePage() {
@@ -56,6 +60,14 @@ export default function DonePage() {
     router.push("/run");
   };
 
+  const handleExitToLanding = () => {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(CURRENT_RUN_STORAGE_KEY);
+    }
+    setCurrentRun(null);
+    router.replace("/");
+  };
+
   if (!isReady) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-zinc-100">
@@ -77,13 +89,23 @@ export default function DonePage() {
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
             지금 당장 시작하세요!
           </h1>
-          <button
-            type="button"
-            onClick={handleRestart}
-            className="text-sm font-semibold text-orange-500 hover:text-orange-600"
-          >
-            다시 생성하기
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              aria-label="홈으로"
+              onClick={handleExitToLanding}
+              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700"
+            >
+              홈으로
+            </button>
+            <button
+              type="button"
+              onClick={handleRestart}
+              className="text-sm font-semibold text-orange-500 hover:text-orange-600"
+            >
+              다시 생성하기
+            </button>
+          </div>
         </div>
 
         <div className="mt-4 rounded-2xl bg-orange-50 p-4 ring-1 ring-orange-200">
