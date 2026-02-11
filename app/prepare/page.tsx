@@ -33,21 +33,27 @@ export default function PreparePage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-100 px-4">
-      <div className="flex flex-col items-center">
-        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-500">
+      <div className="flex flex-col items-center text-center">
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-500 shadow-[0_0_0_1px_rgba(249,115,22,0.15)]">
           <svg viewBox="0 0 24 24" className="h-7 w-7 fill-current">
             <path d="M13 2 6 13h5l-1 9 8-12h-5z" />
           </svg>
         </div>
 
-        <div className="mt-8 flex items-center gap-3">
+        <div
+          className="mt-8 flex items-center gap-3"
+          role="status"
+          aria-live="polite"
+          aria-label="작업 분석 진행 중"
+        >
           <span className="inline-flex h-5 w-5 animate-spin rounded-full border-2 border-orange-200 border-t-orange-500" />
+          <span className="inline-flex h-2 w-2 animate-pulse rounded-full bg-orange-400" />
           <p className="text-2xl font-semibold tracking-tight text-zinc-800">
             작업을 분석하고 있어요...
           </p>
         </div>
 
-        <p className="mt-3 text-sm text-zinc-500">
+        <p className="mt-3 text-sm text-zinc-600">
           약 {countdown}초 후 실행 화면으로 이동합니다
         </p>
       </div>
