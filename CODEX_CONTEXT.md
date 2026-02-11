@@ -19,14 +19,15 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - `npm run lint`
 - `npm run build`
 - `npm test` = smoke gate (`npm run lint && npm run build`)
-- `npm run e2e` = Playwright 회귀 스모크(landing→prepare, prepare positive, run exit/guard, prepare/done guard, run step advance, step3 CTA policy, done positive/restart)
+- `npm run e2e` = Playwright 회귀 스모크(landing→prepare, prepare positive, run exit/guard, prepare/done guard, run step advance, step3 CTA policy, done positive/restart/exit)
 
 ## Recent Work Snapshot
 - `/prepare`: “작업을 분석하고 있어요...” 톤으로 정렬(브랜드 아이콘 + 실제 로딩 인디케이터 + 3초 이동 유지)
 - `/run`: 상태 배지 3단계, step3 CTA 정책(하단 next 대신 카드 완료 유도), StepCard 상세/힌트, TimerRing “초” 중심 표기 반영
 - `/run`: 헤더에 `처음으로 나가기` 추가(세션 폐기 + `/` replace)로 P0 출구 확보
+- `/done`: 헤더에 `홈으로` 추가(세션 폐기 + `/` replace)로 run/done 출구 일관성 확보
 - `/` Landing: 이번 라운드 기준 동작 변경 없음(기존 UX/로직 유지)
-- E2E: `landing-to-prepare`, `prepare-positive`, `run-exit`, `run-guard-redirect`, `prepare-guard-redirect`, `run-step-advance`, `step3-cta-policy`, `done-guard-redirect`, `done-positive`, `done-restart` 스모크 추가
+- E2E: `landing-to-prepare`, `prepare-positive`, `run-exit`, `run-guard-redirect`, `prepare-guard-redirect`, `run-step-advance`, `step3-cta-policy`, `done-guard-redirect`, `done-positive`, `done-restart`, `done-exit` 스모크 추가
 
 ## Operational Rules (Non-Negotiables)
 - 최소 변경/최대 체감 원칙
