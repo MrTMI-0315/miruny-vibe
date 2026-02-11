@@ -217,13 +217,13 @@ export default function RunPage() {
             type="button"
             onClick={handleCompleteCurrent}
             disabled={isFinalStep}
-            className={`h-12 rounded-2xl text-sm font-semibold transition ${
+            className={`h-12 rounded-2xl px-3 text-center text-[11px] font-semibold leading-tight transition sm:px-4 sm:text-sm ${
               isFinalStep
                 ? "cursor-not-allowed border border-orange-200 bg-orange-50 text-orange-500"
                 : "bg-orange-500 text-white hover:bg-orange-600"
             }`}
           >
-            {isFinalStep ? "마지막 단계는 카드 완료 버튼으로 마무리하세요" : "다음 단계로 →"}
+            {isFinalStep ? "마지막 단계는 카드 완료 버튼을 눌러주세요" : "다음 단계로 →"}
           </button>
         </div>
 

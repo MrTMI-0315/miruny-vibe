@@ -23,7 +23,7 @@ export function StepCard({
 
   return (
     <li
-      className={`flex items-center gap-3 rounded-2xl border p-4 transition ${
+      className={`flex items-start gap-3 rounded-2xl border p-3 transition sm:items-center sm:p-4 ${
         isCurrent
           ? "border-orange-300 bg-orange-50"
           : "border-zinc-200 bg-zinc-50 opacity-70"
@@ -41,8 +41,8 @@ export function StepCard({
           {step.title}
         </p>
         {isFinalCurrentStep && (
-          <p className="mt-2 text-xs font-semibold text-orange-600">
-            마지막 단계입니다. 오른쪽 완료 버튼으로 마무리하세요.
+          <p className="mt-1.5 text-[11px] font-semibold leading-snug text-orange-600 sm:mt-2 sm:text-xs">
+            마지막 단계예요. 완료 버튼으로 마무리하세요.
           </p>
         )}
         {isCompleted && <p className="mt-2 text-xs text-emerald-600">완료됨</p>}
@@ -55,7 +55,7 @@ export function StepCard({
           aria-label={`${index + 1}단계 완료하기`}
           className={`shrink-0 rounded-xl text-white transition ${
             isFinalCurrentStep
-              ? "h-11 bg-orange-500 px-5 text-sm font-bold shadow-sm ring-2 ring-orange-200 hover:bg-orange-600"
+              ? "h-10 self-start bg-orange-500 px-4 text-xs font-bold shadow-sm ring-2 ring-orange-200 hover:bg-orange-600 sm:h-11 sm:px-5 sm:text-sm"
               : "h-10 bg-orange-500 px-4 text-xs font-semibold hover:bg-orange-600"
           }`}
         >
