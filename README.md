@@ -21,7 +21,10 @@ npm run dev
 npm run build
 npm run start
 npm run lint
+npm test
 ```
+
+`npm test`는 smoke 경로이며, 내부적으로 `npm run lint && npm run build`를 실행합니다.
 
 ## 현재 구현 플로우
 
