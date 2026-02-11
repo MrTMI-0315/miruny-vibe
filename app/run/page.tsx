@@ -209,7 +209,7 @@ export default function RunPage() {
           <button
             type="button"
             onClick={handleRestartFromFirst}
-            className="h-12 rounded-2xl bg-zinc-800 text-sm font-semibold text-white hover:bg-zinc-900"
+            className="h-12 min-h-[44px] rounded-2xl bg-zinc-800 text-sm font-semibold text-white hover:bg-zinc-900"
           >
             1단계부터 다시 시작
           </button>
@@ -217,9 +217,9 @@ export default function RunPage() {
             type="button"
             onClick={handleCompleteCurrent}
             disabled={isFinalStep}
-            className={`h-12 rounded-2xl px-3 text-center text-[11px] font-semibold leading-tight transition sm:px-4 sm:text-sm ${
+            className={`h-12 min-h-[44px] rounded-2xl px-2 text-center text-[10px] font-semibold leading-tight transition sm:px-4 sm:text-sm ${
               isFinalStep
-                ? "cursor-not-allowed border border-orange-200 bg-orange-50 text-orange-500"
+                ? "pointer-events-none cursor-not-allowed border border-orange-200 bg-orange-50 text-orange-500"
                 : "bg-orange-500 text-white hover:bg-orange-600"
             }`}
           >
