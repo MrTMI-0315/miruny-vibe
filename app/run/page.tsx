@@ -171,6 +171,8 @@ export default function RunPage() {
     return null;
   }
 
+  const isFinalStep = currentRun.currentStepIndex === currentRun.steps.length - 1;
+
   return (
     <main className="min-h-screen bg-zinc-100 px-4 py-8">
       <section className="mx-auto w-full max-w-3xl rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 sm:p-8">
@@ -214,9 +216,14 @@ export default function RunPage() {
           <button
             type="button"
             onClick={handleCompleteCurrent}
-            className="h-12 rounded-2xl bg-orange-500 text-sm font-semibold text-white hover:bg-orange-600"
+            disabled={isFinalStep}
+            className={`h-12 rounded-2xl text-sm font-semibold transition ${
+              isFinalStep
+                ? "cursor-not-allowed border border-orange-200 bg-orange-50 text-orange-500"
+                : "bg-orange-500 text-white hover:bg-orange-600"
+            }`}
           >
-            다음 단계로 →
+            {isFinalStep ? "마지막 단계는 카드 완료 버튼으로 마무리하세요" : "다음 단계로 →"}
           </button>
         </div>
 
@@ -229,6 +236,7 @@ export default function RunPage() {
               isCurrent={index === currentRun.currentStepIndex}
               isCompleted={currentRun.completedStepIndexes.includes(index)}
               isDisabled={index !== currentRun.currentStepIndex}
+              isFinalStep={index === currentRun.steps.length - 1}
               onCompleteCurrent={handleCompleteCurrent}
             />
           ))}

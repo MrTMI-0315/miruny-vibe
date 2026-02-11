@@ -6,6 +6,7 @@ type StepCardProps = {
   isCurrent: boolean;
   isCompleted: boolean;
   isDisabled: boolean;
+  isFinalStep: boolean;
   onCompleteCurrent: () => void;
 };
 
@@ -15,8 +16,11 @@ export function StepCard({
   isCurrent,
   isCompleted,
   isDisabled,
+  isFinalStep,
   onCompleteCurrent,
 }: StepCardProps) {
+  const isFinalCurrentStep = isCurrent && isFinalStep;
+
   return (
     <li
       className={`flex items-center gap-3 rounded-2xl border p-4 transition ${
@@ -36,6 +40,11 @@ export function StepCard({
         >
           {step.title}
         </p>
+        {isFinalCurrentStep && (
+          <p className="mt-2 text-xs font-semibold text-orange-600">
+            마지막 단계입니다. 오른쪽 완료 버튼으로 마무리하세요.
+          </p>
+        )}
         {isCompleted && <p className="mt-2 text-xs text-emerald-600">완료됨</p>}
       </div>
 
@@ -43,7 +52,12 @@ export function StepCard({
         <button
           type="button"
           onClick={onCompleteCurrent}
-          className="h-10 shrink-0 rounded-xl bg-orange-500 px-4 text-xs font-semibold text-white transition hover:bg-orange-600"
+          aria-label={`${index + 1}단계 완료하기`}
+          className={`shrink-0 rounded-xl text-white transition ${
+            isFinalCurrentStep
+              ? "h-11 bg-orange-500 px-5 text-sm font-bold shadow-sm ring-2 ring-orange-200 hover:bg-orange-600"
+              : "h-10 bg-orange-500 px-4 text-xs font-semibold hover:bg-orange-600"
+          }`}
         >
           완료
         </button>
