@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 
 type ConfettiPiece = {
   id: number;
@@ -12,35 +12,68 @@ type ConfettiPiece = {
   drift: number;
   color: string;
   opacity: number;
+  burstIndex: number;
+  rise: number;
+  fall: number;
 };
 
 const COLORS = ["#f97316", "#fb923c", "#facc15", "#22c55e", "#38bdf8", "#a78bfa"];
 
-function createPieces(count: number): ConfettiPiece[] {
-  return Array.from({ length: count }, (_, index) => ({
-    id: index,
-    left: Math.random() * 100,
-    size: 6 + Math.random() * 8,
-    duration: 1.8 + Math.random() * 1.6,
-    delay: Math.random() * 0.35,
-    rotate: Math.random() * 360,
-    drift: -40 + Math.random() * 80,
-    color: COLORS[Math.floor(Math.random() * COLORS.length)],
-    opacity: 0.7 + Math.random() * 0.3,
-  }));
+function createPieces(bursts = 4, perBurst = 16): ConfettiPiece[] {
+  const origins = Array.from({ length: bursts }, (_, index) => {
+    const base = ((index + 1) / (bursts + 1)) * 100;
+    return Math.max(8, Math.min(92, base + (Math.random() * 10 - 5)));
+  });
+
+  const pieces: ConfettiPiece[] = [];
+
+  origins.forEach((origin, burstIndex) => {
+    for (let i = 0; i < perBurst; i += 1) {
+      const id = burstIndex * perBurst + i;
+      pieces.push({
+        id,
+        burstIndex,
+        left: origin + (Math.random() * 16 - 8),
+        size: 5 + Math.random() * 7,
+        duration: 1.2 + Math.random() * 1.3,
+        delay: Math.random() * 0.28,
+        rotate: Math.random() * 360,
+        drift: -90 + Math.random() * 180,
+        rise: 14 + Math.random() * 18,
+        fall: 18 + Math.random() * 24,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        opacity: 0.75 + Math.random() * 0.25,
+      });
+    }
+  });
+
+  return pieces;
 }
 
 export function ConfettiBurst() {
-  const pieces = useMemo(() => createPieces(48), []);
-  const [visible, setVisible] = useState(true);
+  const pieces = useMemo(() => createPieces(4, 15), []);
+  const hasFiredRef = useRef(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      setVisible(false);
-    }, 2800);
+    if (hasFiredRef.current) {
+      return;
+    }
+    let timeoutId: number | null = null;
+
+    const frameId = window.requestAnimationFrame(() => {
+      hasFiredRef.current = true;
+      setVisible(true);
+      timeoutId = window.setTimeout(() => {
+        setVisible(false);
+      }, 2200);
+    });
 
     return () => {
-      window.clearTimeout(timeoutId);
+      window.cancelAnimationFrame(frameId);
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
     };
   }, []);
 
@@ -53,7 +86,7 @@ export function ConfettiBurst() {
       {pieces.map((piece) => (
         <div
           key={piece.id}
-          className="confetti-piece absolute top-[-10vh]"
+          className="confetti-piece absolute bottom-[-2vh]"
           style={{
             left: `${piece.left}%`,
             width: `${piece.size}px`,
@@ -64,6 +97,9 @@ export function ConfettiBurst() {
             animationDuration: `${piece.duration}s`,
             animationDelay: `${piece.delay}s`,
             ["--confetti-drift" as string]: `${piece.drift}px`,
+            ["--confetti-rise" as string]: `${piece.rise}vh`,
+            ["--confetti-fall" as string]: `${piece.fall}vh`,
+            ["--confetti-spread" as string]: `${piece.burstIndex * 3}px`,
           }}
         />
       ))}
@@ -71,10 +107,27 @@ export function ConfettiBurst() {
       <style jsx global>{`
         @keyframes confetti-fall {
           0% {
-            transform: translate3d(0, -12vh, 0) rotate(0deg);
+            transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+          }
+          35% {
+            transform: translate3d(
+                calc(var(--confetti-drift) * 0.65 + var(--confetti-spread)),
+                calc(var(--confetti-rise) * -1),
+                0
+              )
+              rotate(320deg)
+              scale(1);
+            opacity: 1;
           }
           100% {
-            transform: translate3d(var(--confetti-drift), 105vh, 0) rotate(720deg);
+            transform: translate3d(
+                calc(var(--confetti-drift) * 1.15 + var(--confetti-spread)),
+                var(--confetti-fall),
+                0
+              )
+              rotate(720deg)
+              scale(0.92);
+            opacity: 0;
           }
         }
 
