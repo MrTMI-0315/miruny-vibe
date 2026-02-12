@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { SessionMetaSlot } from "@/components/SessionMetaSlot";
 import { StepCard } from "@/components/StepCard";
 import { TimerRing } from "@/components/TimerRing";
 import { createThreeSteps } from "@/lib/chunking";
@@ -188,6 +189,8 @@ export default function RunPage() {
   return (
     <main className="min-h-screen bg-zinc-100 px-4 py-8">
       <section className="mx-auto w-full max-w-3xl rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 sm:p-8">
+        <SessionMetaSlot className="mb-3" />
+
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
             지금 당장 시작하세요!

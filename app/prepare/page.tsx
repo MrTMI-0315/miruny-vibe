@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { SessionMetaSlot } from "@/components/SessionMetaSlot";
 import { loadCurrentRun } from "@/lib/storage";
 
 export default function PreparePage() {
@@ -34,6 +35,8 @@ export default function PreparePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-100 px-4">
       <div className="w-full max-w-xl rounded-[18px] border border-zinc-200 bg-white p-8 text-center shadow-sm">
+        <SessionMetaSlot className="mb-3 text-left" />
+
         <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-500 shadow-[0_0_0_1px_rgba(249,115,22,0.15)]">
           <svg viewBox="0 0 24 24" className="h-7 w-7 fill-current">
             <path d="M13 2 6 13h5l-1 9 8-12h-5z" />

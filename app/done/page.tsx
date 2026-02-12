@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ConfettiBurst } from "@/components/ConfettiBurst";
 import { DoneRing } from "@/components/DoneRing";
+import { SessionMetaSlot } from "@/components/SessionMetaSlot";
 import {
   CURRENT_RUN_STORAGE_KEY,
   loadCurrentRun,
@@ -85,6 +86,8 @@ export default function DonePage() {
       <ConfettiBurst />
 
       <section className="mx-auto w-full max-w-3xl rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 sm:p-8">
+        <SessionMetaSlot className="mb-3" />
+
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
             지금 당장 시작하세요!

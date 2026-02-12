@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { InputCard } from "@/components/InputCard";
+import { SessionMetaSlot } from "@/components/SessionMetaSlot";
 import { TodoList } from "@/components/TodoList";
 import { createThreeSteps } from "@/lib/chunking";
 import { loadTasks, saveCurrentRun, saveTasks } from "@/lib/storage";
@@ -65,6 +66,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-zinc-100 px-4 py-10 sm:py-12">
       <main className="mx-auto w-full max-w-[560px] space-y-8">
+        <SessionMetaSlot className="px-1" />
+
         <section className="rounded-[18px] border border-orange-200 bg-white p-4 shadow-sm sm:p-6">
           <InputCard
             value={inputValue}
