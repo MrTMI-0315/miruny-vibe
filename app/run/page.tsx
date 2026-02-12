@@ -244,7 +244,7 @@ export default function RunPage() {
                 : "bg-orange-500 text-white hover:bg-orange-600"
             }`}
           >
-            {isFinalStep ? "마지막 단계는 카드 완료 버튼을 눌러주세요" : "다음 단계로 →"}
+            {isFinalStep ? "마지막 단계는 카드 완료만" : "다음 단계로 →"}
           </button>
         </div>
 

@@ -46,7 +46,7 @@ export function StepCard({
         </p>
         {isFinalCurrentStep && (
           <p className="mt-1.5 text-[11px] font-semibold leading-snug text-orange-600 sm:mt-2 sm:text-xs">
-            마지막 단계예요. 아래 완료 버튼으로 마무리하세요.
+            마지막 단계는 완료 버튼만 누르세요.
           </p>
         )}
         {isCompleted && <p className="mt-2 text-xs text-emerald-600">완료됨</p>}
