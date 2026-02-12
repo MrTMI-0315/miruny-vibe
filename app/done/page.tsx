@@ -113,21 +113,22 @@ export default function DonePage() {
           <p className="mt-1 text-base font-medium text-zinc-900">{currentRun.taskText}</p>
         </div>
 
-        <div className="mt-7 text-center">
+        <div className="mt-6 rounded-2xl border border-orange-200 bg-orange-50/60 px-4 py-6 text-center">
           <p className="mb-3 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
-            잘했어요! 🎉
+            완료 요약
           </p>
           <DoneRing totalElapsedSec={currentRun.totalElapsedSec} />
           <p className="mt-4 text-3xl font-black tracking-tight text-zinc-900">
             {currentRun.totalElapsedSec} 완료!
           </p>
+          <p className="mt-1 text-sm font-medium text-zinc-600">이번 실행을 끝까지 마쳤어요</p>
         </div>
 
-        <ul className="mt-8 space-y-3">
+        <ul className="mt-6 space-y-3">
           {currentRun.steps.map((step, index) => (
             <li
               key={`${step.title}-${index}`}
-              className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-4 opacity-80"
+              className="flex items-start gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-3 transition sm:items-center sm:p-4"
             >
               <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
                 ✓
@@ -136,8 +137,8 @@ export default function DonePage() {
                 <p className="text-xs font-semibold tracking-wide text-zinc-500">
                   STEP {index + 1}
                 </p>
-                <p className="mt-1 text-sm font-medium text-zinc-700">{step.title}</p>
-                <p className="mt-1 text-xs text-emerald-600">완료됨</p>
+                <p className="mt-1 text-sm font-medium text-zinc-800">{step.title}</p>
+                <p className="mt-2 text-xs text-emerald-600">완료됨</p>
               </div>
               <span className="shrink-0 text-xs text-zinc-400">DONE</span>
             </li>

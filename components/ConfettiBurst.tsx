@@ -18,6 +18,7 @@ type ConfettiPiece = {
 };
 
 const COLORS = ["#f97316", "#fb923c", "#facc15", "#22c55e", "#38bdf8", "#a78bfa"];
+let hasShownConfettiInSession = false;
 
 function createPieces(bursts = 4, perBurst = 16): ConfettiPiece[] {
   const origins = Array.from({ length: bursts }, (_, index) => {
@@ -51,22 +52,23 @@ function createPieces(bursts = 4, perBurst = 16): ConfettiPiece[] {
 }
 
 export function ConfettiBurst() {
-  const pieces = useMemo(() => createPieces(4, 15), []);
+  const pieces = useMemo(() => createPieces(4, 12), []);
   const hasFiredRef = useRef(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (hasFiredRef.current) {
+    if (hasFiredRef.current || hasShownConfettiInSession) {
       return;
     }
     let timeoutId: number | null = null;
 
     const frameId = window.requestAnimationFrame(() => {
       hasFiredRef.current = true;
+      hasShownConfettiInSession = true;
       setVisible(true);
       timeoutId = window.setTimeout(() => {
         setVisible(false);
-      }, 2200);
+      }, 1800);
     });
 
     return () => {
