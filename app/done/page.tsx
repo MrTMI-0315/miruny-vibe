@@ -94,14 +94,15 @@ export default function DonePage() {
               type="button"
               aria-label="홈으로"
               onClick={handleExitToLanding}
-              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700"
+              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
             >
               홈으로
             </button>
             <button
               type="button"
+              aria-label="단계 다시 생성하기"
               onClick={handleRestart}
-              className="text-sm font-semibold text-orange-500 hover:text-orange-600"
+              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
             >
               다시 생성하기
             </button>
@@ -122,6 +123,24 @@ export default function DonePage() {
             {currentRun.totalElapsedSec} 완료!
           </p>
           <p className="mt-1 text-sm font-medium text-zinc-600">이번 실행을 끝까지 마쳤어요</p>
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+            <p className="text-xs font-semibold tracking-wide text-zinc-500">총 소요시간</p>
+            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
+            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+          </article>
+          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+            <p className="text-xs font-semibold tracking-wide text-zinc-500">완료 steps</p>
+            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
+            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+          </article>
+          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+            <p className="text-xs font-semibold tracking-wide text-zinc-500">focus score</p>
+            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
+            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+          </article>
         </div>
 
         <ul className="mt-6 space-y-3">
@@ -148,7 +167,8 @@ export default function DonePage() {
         <button
           type="button"
           onClick={handleRestart}
-          className="mt-8 h-12 w-full rounded-2xl bg-zinc-800 text-sm font-semibold text-white transition hover:bg-zinc-900"
+          aria-label="1단계부터 다시 시작"
+          className="mt-8 h-12 w-full rounded-2xl bg-orange-500 text-sm font-semibold text-white transition hover:bg-orange-600 active:bg-orange-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2"
         >
           1단계부터 다시 시작
         </button>

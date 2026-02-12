@@ -64,16 +64,18 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-zinc-100 px-4 py-10 sm:py-12">
-      <main className="mx-auto w-full max-w-[560px]">
-        <InputCard
-          value={inputValue}
-          canSubmit={canSubmit}
-          onChange={setInputValue}
-          onAddToList={addTaskFromInput}
-          onStartNow={handleStartNow}
-        />
+      <main className="mx-auto w-full max-w-[560px] space-y-8">
+        <section className="rounded-[18px] border border-orange-200 bg-white p-4 shadow-sm sm:p-6">
+          <InputCard
+            value={inputValue}
+            canSubmit={canSubmit}
+            onChange={setInputValue}
+            onAddToList={addTaskFromInput}
+            onStartNow={handleStartNow}
+          />
+        </section>
 
-        <div className="mt-10">
+        <section className="rounded-[18px] border border-zinc-200 bg-zinc-50 p-4 sm:p-6">
           <TodoList
             tasks={tasks}
             onToggle={(id) => {
@@ -93,7 +95,7 @@ export default function HomePage() {
               setTasks([]);
             }}
           />
-        </div>
+        </section>
       </main>
     </div>
   );

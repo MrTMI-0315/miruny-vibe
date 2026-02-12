@@ -193,20 +193,22 @@ export default function RunPage() {
             지금 당장 시작하세요!
           </h1>
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={handleExitToLanding}
-              className="text-sm font-semibold text-zinc-500 hover:text-zinc-700"
-            >
-              처음으로 나가기
-            </button>
-            <button
-              type="button"
-              onClick={handleRegenerate}
-              className="text-sm font-semibold text-orange-500 hover:text-orange-600"
-            >
-              다시 생성하기
-            </button>
+          <button
+            type="button"
+            onClick={handleExitToLanding}
+            aria-label="처음으로 나가기"
+            className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
+          >
+            처음으로 나가기
+          </button>
+          <button
+            type="button"
+            onClick={handleRegenerate}
+            aria-label="단계 다시 생성하기"
+            className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
+          >
+            다시 생성하기
+          </button>
           </div>
         </div>
 
@@ -230,7 +232,8 @@ export default function RunPage() {
           <button
             type="button"
             onClick={handleRestartFromFirst}
-            className="h-12 min-h-[44px] rounded-2xl bg-zinc-800 text-sm font-semibold text-white hover:bg-zinc-900"
+            aria-label="1단계부터 다시 시작"
+            className="h-12 min-h-[44px] rounded-2xl border border-zinc-300 bg-white text-sm font-semibold text-zinc-700 transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
           >
             1단계부터 다시 시작
           </button>
@@ -238,10 +241,12 @@ export default function RunPage() {
             type="button"
             onClick={handleCompleteCurrent}
             disabled={isFinalStep}
-            className={`h-12 min-h-[44px] rounded-2xl px-2 text-center text-[10px] font-semibold leading-tight transition sm:px-4 sm:text-sm ${
+            aria-disabled={isFinalStep ? true : undefined}
+            aria-label={isFinalStep ? "마지막 단계는 카드 완료 버튼에서 진행" : "다음 단계로 이동"}
+            className={`h-12 min-h-[44px] rounded-2xl px-2 text-center text-[10px] font-semibold leading-tight transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 sm:px-4 sm:text-sm ${
               isFinalStep
-                ? "pointer-events-none cursor-not-allowed border border-orange-200 bg-orange-50 text-orange-500"
-                : "bg-orange-500 text-white hover:bg-orange-600"
+                ? "pointer-events-none cursor-not-allowed border border-zinc-200 bg-zinc-100 text-zinc-400"
+                : "bg-orange-500 text-white hover:bg-orange-600 active:bg-orange-700"
             }`}
           >
             {isFinalStep ? "마지막 단계는 카드 완료만" : "다음 단계로 →"}
