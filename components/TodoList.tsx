@@ -17,23 +17,23 @@ export function TodoList({
 }: TodoListProps) {
   return (
     <section>
-      <h2 className="flex items-center gap-2 text-2xl font-bold text-zinc-900">
+      <h2 className="flex items-center gap-2 text-[20px] font-semibold leading-[26px] text-zinc-900">
         <span className="text-[20px]" aria-hidden>
           📋
         </span>
         오늘의 할 일 목록
       </h2>
 
-      <ul className="mt-4 space-y-3">
+      <ul className="mt-6 space-y-3">
         {tasks.length === 0 ? (
-          <li className="rounded-2xl border border-dashed border-zinc-300 bg-white px-4 py-5 text-sm text-zinc-500">
+          <li className="rounded-[14px] border border-dashed border-zinc-300 bg-white p-4 text-sm text-zinc-500">
             아직 추가된 할 일이 없습니다.
           </li>
         ) : (
           tasks.map((task) => (
             <li
               key={task.id}
-              className="flex items-center gap-3 rounded-2xl border border-zinc-300 bg-white px-4 py-3"
+              className="flex items-center gap-3 rounded-[14px] border border-zinc-200 bg-white p-4"
             >
               <button
                 type="button"
@@ -51,7 +51,7 @@ export function TodoList({
                 </svg>
               </button>
               <span
-                className={`flex-1 text-sm ${
+                className={`flex-1 text-base leading-6 ${
                   task.completed ? "text-zinc-500 line-through" : "text-zinc-800"
                 }`}
               >

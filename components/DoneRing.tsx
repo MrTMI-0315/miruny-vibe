@@ -31,7 +31,9 @@ export function DoneRing({ totalElapsedSec }: DoneRingProps) {
       </svg>
 
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-        <p className="text-6xl font-black leading-none text-zinc-900">{totalElapsedSec}</p>
+        <p className="text-6xl font-black leading-none tabular-nums text-zinc-900">
+          {totalElapsedSec}
+        </p>
         <p className="mt-1 text-xs font-medium text-zinc-500">초</p>
       </div>
     </div>
