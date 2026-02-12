@@ -99,3 +99,12 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - 3) 검증: `npm test (exit 0)`
 - 4) 캡처 필요: 라우트 + 타이밍
 - 5) 다음 마이크로 태스크
+
+## UI 리디자인 로그 (MIRUNY)
+- 2026-02-12 (KST)
+- 목표: 토큰 문법(간격/라운드/보더/타이포) 정렬 + 라우트 액션 위계 정돈 + step3 정책 유지
+- 산출물: `apps/miruny/UI_Direction.md` (UI 시스템/지시사항 단일 소스)
+- 품질 게이트: `npm test (exit 0)`
+- 관련 커밋: `496b981` (`feat(ui): add done metrics placeholders and no-shift confetti`)
+- 관련 커밋: `2897211` (`refactor(ui): apply token system to core components`), `a2a9518` (`docs: add miruny UI direction and token guide`)
+- TODO: e2e 보정(`landing-enter-start`, `landing-todo-persist`, `step3-cta-policy`)은 stash 기준으로 별도 커밋 분리

@@ -63,6 +63,12 @@ apps/miruny/
     timer.ts
 ```
 
+## MIRUNY 문서
+
+- UI System / Direction: `apps/miruny/UI_Direction.md`
+- 위 문서는 토큰/라우트별 지시사항/다음 UI 태스크의 단일 소스(SSOT)입니다.
+- 핵심 플로우(`/ -> /prepare -> /run -> /done`)와 `/run` step3 단일 진행 정책(하단 CTA 비활성, 카드 완료 진입)은 유지합니다.
+
 ## 개발 중 이슈 메모
 
 - Next 템플릿의 `next/font/google` fetch로 오프라인 빌드 실패가 발생해, 외부 폰트 의존성을 제거하고 시스템 폰트 기반으로 전환했습니다.
