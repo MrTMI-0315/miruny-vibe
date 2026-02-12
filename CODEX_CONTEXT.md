@@ -21,6 +21,11 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - `npm test` = smoke gate (`npm run lint && npm run build`)
 - `npm run e2e` = Playwright 회귀 스모크(landing list add/toggle/delete/clear-completed/clear-all/start/enter-start/todo-persist, prepare positive, run exit/guard/restart/regenerate, prepare/done guard, run step advance, step3 CTA policy, done positive/restart/exit)
 
+## Dev Panic Runbook (Turbopack)
+- 증상: `next dev` 실행 중 Turbopack panic / `.next/dev/lock` 충돌 / corrupted cache 류 에러.
+- 복구: (1) 중복 `next dev` 프로세스 종료 → (2) `.next/` 폴더 삭제(wipe) → (3) `npm run dev` 재실행.
+- 재발 방지: dev 서버는 1개만 유지(새로 띄우기 전 기존 터미널 종료).
+
 ## Recent Work Snapshot
 - `/prepare`: “작업을 분석하고 있어요...” 톤으로 정렬(브랜드 아이콘 + 실제 로딩 인디케이터 + 3초 이동 유지)
 - `/run`: 상태 배지 3단계, step3 CTA 정책(하단 next 대신 카드 완료 유도), StepCard 상세/힌트, TimerRing “초” 중심 표기 반영
