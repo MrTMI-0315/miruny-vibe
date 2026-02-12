@@ -126,17 +126,17 @@ export default function DonePage() {
         </div>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">총 소요시간</p>
             <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
             <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
           </article>
-          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">완료 steps</p>
             <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
             <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
           </article>
-          <article className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">focus score</p>
             <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
             <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
@@ -147,7 +147,7 @@ export default function DonePage() {
           {currentRun.steps.map((step, index) => (
             <li
               key={`${step.title}-${index}`}
-              className="flex items-start gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-3 transition sm:items-center sm:p-4"
+              className="flex items-start gap-3 rounded-[14px] border border-zinc-200 bg-zinc-50 p-4 transition sm:items-center"
             >
               <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
                 ✓

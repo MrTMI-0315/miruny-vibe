@@ -84,7 +84,7 @@ export function ConfettiBurst() {
   }
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
       {pieces.map((piece) => (
         <div
           key={piece.id}
