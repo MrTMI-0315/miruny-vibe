@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --hostname 127.0.0.1",
     "lint": "eslint",
     "test": "npm run lint && npm run build",
-    "e2e": "npm run build && playwright test"
+    "e2e": "npm run build -- --webpack && playwright test"
   },
   "dependencies": {
     "next": "16.1.6",
