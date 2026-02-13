@@ -29,13 +29,15 @@ test("step3 keeps bottom CTA disabled and uses card complete as progress action"
 
   const step3Card = page.locator("li").filter({ hasText: "STEP 3" });
   const step3CompleteButton = step3Card.getByRole("button", { name: "완료" });
-  const bottomDisabledCta = page.getByRole("button", {
-    name: "마지막 단계는 카드 완료 버튼을 눌러주세요",
-  });
+  const bottomDisabledCta = page.locator("button[aria-disabled='true']");
 
   await expect(step3CompleteButton).toBeVisible();
   await expect(step3CompleteButton).toBeEnabled();
+  await expect(bottomDisabledCta).toHaveCount(1);
   await expect(bottomDisabledCta).toBeVisible();
   await expect(bottomDisabledCta).toBeDisabled();
-  await expect(page.getByRole("button", { name: /다음 단계로/ })).toHaveCount(0);
+  await expect(bottomDisabledCta).toHaveAttribute("aria-disabled", "true");
+
+  await step3CompleteButton.click();
+  await expect(page).toHaveURL(/\/done$/);
 });
