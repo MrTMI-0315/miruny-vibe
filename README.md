@@ -79,6 +79,10 @@ apps/miruny/
 - 고정 보관 위치: `/tmp/miruny-done-positive-e2e.log` (항목 1개만 최신 로그 갱신)
 - 고정 템플릿: `Time`, `Command`, `Result`, `Pass` 4줄
 - 권장 실행: `npm run e2e:done-positive:log`
+- CI/런북 기본 실행 명령: `npm run e2e:done-positive:log` (직접 `npm run e2e -- done-positive.spec.ts` 실행 금지)
+- CI/감시 규칙:
+  - 실패: `Pass: FAIL` 또는 `Pass` 라인 부재
+  - 패스 판정: `Result: <숫자> passed` + `Pass: PASS`
 
 ### done-positive E2E 증거
 

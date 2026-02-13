@@ -112,4 +112,6 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 ### done-positive 공통 증거 스펙 (승인 환경 기준 1회)
 - 통일 템플릿(단일 블록): `Time`, `Command`, `Result`, `Pass`
 - 보관 위치(단일): `/tmp/miruny-done-positive-e2e.log`
-- 실행 커맨드(고정): `npm run e2e:done-positive:log`
+- 실행 커맨드(고정): `npm run e2e:done-positive:log` (CI/런북/운영 기본값)
+- 경고 규칙: `Pass: PASS` 이외는 실패로 처리, `Pass`가 없으면 실패
+- Result 기반 회귀 체크: `Result` 라인에 `N passed` 패턴이 반드시 있어야 PASS 간주
