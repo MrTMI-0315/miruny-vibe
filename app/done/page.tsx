@@ -82,6 +82,10 @@ export default function DonePage() {
     return null;
   }
 
+  const completedStepCount = currentRun.completedStepIndexes.length;
+  const totalStepCount = currentRun.steps.length;
+  const focusScore = completedStepCount === totalStepCount ? 100 : 0;
+
   return (
     <main className="relative min-h-screen bg-zinc-100 px-4 py-8">
       <ConfettiBurst />
@@ -130,20 +134,24 @@ export default function DonePage() {
         </div>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-white p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">총 소요시간</p>
-            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
-            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+            <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
+              {currentRun.totalElapsedSec}
+            </p>
+            <p className="mt-1 text-xs text-zinc-500">초</p>
           </article>
-          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-white p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">완료 steps</p>
-            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
-            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+            <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
+              {completedStepCount}/{totalStepCount}
+            </p>
+            <p className="mt-1 text-xs text-zinc-500">완료</p>
           </article>
-          <article className="rounded-[14px] border border-zinc-200 bg-zinc-50 p-4">
+          <article className="rounded-[14px] border border-zinc-200 bg-white p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">focus score</p>
-            <p className="mt-2 text-xl font-black tabular-nums text-zinc-900">--</p>
-            <p className="mt-1 text-xs text-zinc-500">metrics slot</p>
+            <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">{focusScore}</p>
+            <p className="mt-1 text-xs text-zinc-500">score</p>
           </article>
         </div>
 
@@ -151,10 +159,12 @@ export default function DonePage() {
           {currentRun.steps.map((step, index) => (
             <li
               key={`${step.title}-${index}`}
-              className="flex items-start gap-3 rounded-[14px] border border-zinc-200 bg-zinc-50 p-4 transition sm:items-center"
+              className="flex items-start gap-3 rounded-[14px] border border-zinc-200 bg-white p-4 transition sm:items-center"
             >
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
-                ✓
+              <span
+                aria-hidden="true"
+                className="mt-0.5 h-10 w-[3px] shrink-0 rounded-full bg-emerald-500"
+              >
               </span>
               <div className="flex-1">
                 <p className="text-xs font-semibold tracking-wide text-zinc-500">
@@ -163,7 +173,6 @@ export default function DonePage() {
                 <p className="mt-1 text-sm font-medium text-zinc-800">{step.title}</p>
                 <p className="mt-2 text-xs text-emerald-600">완료됨</p>
               </div>
-              <span className="shrink-0 text-xs text-zinc-400">DONE</span>
             </li>
           ))}
         </ul>
