@@ -20,6 +20,8 @@ export function StepCard({
   onCompleteCurrent,
 }: StepCardProps) {
   const isFinalCurrentStep = isCurrent && isFinalStep;
+  const isDoneCard = !isCurrent && isCompleted;
+  const isFutureCard = !isCurrent && isDisabled && !isCompleted;
 
   return (
     <li
@@ -29,10 +31,21 @@ export function StepCard({
           : ""
       } ${
         isCurrent
-          ? "border-orange-300 bg-orange-50"
-          : "bg-zinc-50 opacity-80"
+          ? "bg-orange-50/70"
+          : isDoneCard
+            ? "bg-zinc-50"
+            : isFutureCard
+              ? "bg-zinc-50/80 opacity-70"
+              : "bg-zinc-50/80"
       }`}
     >
+      <span
+        aria-hidden="true"
+        className={`mt-0.5 h-10 w-[3px] shrink-0 rounded-full ${
+          isCurrent ? "bg-orange-500" : "bg-transparent"
+        }`}
+      />
+
       <div className="flex-1">
         <p className="text-xs font-semibold tracking-wide text-zinc-500">
           STEP {index + 1}
@@ -57,7 +70,7 @@ export function StepCard({
           type="button"
           onClick={onCompleteCurrent}
           aria-label={isFinalCurrentStep ? "마지막 단계 완료하기" : `${index + 1}단계 완료하기`}
-          className={`shrink-0 rounded-[10px] text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 ${
+          className={`shrink-0 rounded-[10px] text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 ${
             isFinalCurrentStep
               ? "h-11 self-start bg-orange-500 px-4 text-xs font-bold shadow-sm ring-1 ring-orange-200 hover:bg-orange-600 sm:px-5 sm:text-sm max-[360px]:mt-1 max-[360px]:w-full max-[360px]:self-stretch"
               : "h-10 bg-orange-500 px-4 text-xs font-semibold hover:bg-orange-600 active:bg-orange-700"

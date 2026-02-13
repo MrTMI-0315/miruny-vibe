@@ -4,7 +4,7 @@ type DoneRingProps = {
 
 export function DoneRing({ totalElapsedSec }: DoneRingProps) {
   const size = 220;
-  const strokeWidth = 12;
+  const strokeWidth = 10;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 

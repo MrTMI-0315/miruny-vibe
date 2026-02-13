@@ -40,7 +40,7 @@ export function TodoList({
                 onClick={() => onToggle(task.id)}
                 aria-label={`${task.text} 완료 토글`}
                 aria-pressed={task.completed}
-                className={`inline-flex h-5 w-5 items-center justify-center rounded-full border transition ${
+                className={`inline-flex h-5 w-5 items-center justify-center rounded-full border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 ${
                   task.completed
                     ? "border-orange-300 bg-orange-100 text-orange-500"
                     : "border-zinc-300 bg-white text-transparent hover:border-orange-300"
@@ -60,7 +60,7 @@ export function TodoList({
               <button
                 type="button"
                 onClick={() => onDelete(task.id)}
-                className="text-sm font-medium text-zinc-500 transition hover:text-zinc-800"
+                className="text-sm font-medium text-zinc-500 transition hover:text-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
                 aria-label={`${task.text} 삭제`}
               >
                 X
@@ -74,7 +74,7 @@ export function TodoList({
         <button
           type="button"
           onClick={onDeleteCompleted}
-          className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900"
+          className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
         >
           완료된 항목 삭제하기
         </button>
@@ -82,7 +82,7 @@ export function TodoList({
         <button
           type="button"
           onClick={onDeleteAll}
-          className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900"
+          className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
         >
           전체 삭제하기
         </button>
