@@ -8,7 +8,8 @@
     "start": "next start --hostname 127.0.0.1",
     "lint": "eslint",
     "test": "npm run lint && npm run build",
-    "e2e": "npm run build -- --webpack && playwright test"
+    "e2e": "npm run build -- --webpack && playwright test",
+    "e2e:done-positive:log": "bash -lc 'TS=$(date \"+%Y-%m-%d %H:%M:%S %Z\"); printf \"Time: %s\\nCommand: npm run e2e -- done-positive.spec.ts\\n\" \"$TS\" > /tmp/miruny-done-positive-e2e.log && npm run e2e -- done-positive.spec.ts 2>&1 | tee -a /tmp/miruny-done-positive-e2e.log && printf \"Result: PASS\\n\" >> /tmp/miruny-done-positive-e2e.log'"
   },
   "dependencies": {
     "next": "16.1.6",

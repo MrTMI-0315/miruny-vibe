@@ -80,3 +80,9 @@ apps/miruny/
 - 명령: `npm run e2e -- done-positive.spec.ts`
 - 샌드박스 재현: 기본 환경 실패 (`EPERM 127.0.0.1:3310`), 승인 실행에서 통과
 - 결과: `✓ ...` `1 passed (7.3s)`
+
+## done-positive Evidence Convention
+
+- 고정 보관 위치: `/tmp/miruny-done-positive-e2e.log` (항목 1개만 최신 로그 갱신)
+- 고정 템플릿: `Time`, `Command`, `Result` 3줄
+- 권장 실행: `npm run e2e:done-positive:log`
