@@ -32,6 +32,15 @@ test("done page renders when finished info exists", async ({ page }) => {
   await expect(page).toHaveURL(/\/done$/);
   await expect(page.getByText("83 완료!")).toBeVisible();
   await expect(page.getByRole("button", { name: "1단계부터 다시 시작" })).toBeVisible();
+  await expect(page.getByText("100/100")).toBeVisible();
+
+  const pageTopBefore = await page.locator("main").first().boundingBox();
+
+  await expect(page.locator(".confetti-piece").first()).toBeVisible({ timeout: 1200 });
+
+  const pageTopDuring = await page.locator("main").first().boundingBox();
+  expect(pageTopDuring?.y).toBe(pageTopBefore?.y);
+  expect(pageTopDuring?.height).toBe(pageTopBefore?.height);
 
   const currentRunAfterLoad = await page.evaluate(() => {
     return window.localStorage.getItem("miruny.currentRun");
