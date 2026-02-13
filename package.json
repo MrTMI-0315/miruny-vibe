@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "npm run lint && npm run build",
     "e2e": "npm run build -- --webpack && playwright test",
-    "e2e:done-positive:log": "bash -lc 'TS=$(date \"+%Y-%m-%d %H:%M:%S %Z\"); printf \"Time: %s\\nCommand: npm run e2e -- done-positive.spec.ts\\n\" \"$TS\" > /tmp/miruny-done-positive-e2e.log && npm run e2e -- done-positive.spec.ts 2>&1 | tee -a /tmp/miruny-done-positive-e2e.log && printf \"Result: PASS\\n\" >> /tmp/miruny-done-positive-e2e.log'"
+    "e2e:done-positive:log": "bash -lc 'set -e; LOG_FILE=/tmp/miruny-done-positive-e2e.log; TMP_FILE=$(mktemp); TS=$(date \"+%Y-%m-%d %H:%M:%S %Z\"); npm run e2e -- done-positive.spec.ts > \"$TMP_FILE\" 2>&1 || STATUS=$?; STATUS=${STATUS:-0}; cat \"$TMP_FILE\"; RESULT_LINE=$(grep -E \"^[[:space:]]*[0-9]+ passed \\\\(.*\" \"$TMP_FILE\" | tail -n 1 || true); if [ -z \"$RESULT_LINE\" ]; then RESULT_LINE=\"(no done-positive passed summary)\"; fi; if [ \"$STATUS\" -eq 0 ]; then PASS=\"PASS\"; else PASS=\"FAIL\"; fi; printf \"Time: %s\\nCommand: npm run e2e -- done-positive.spec.ts\\nResult: %s\\nPass: %s\\n\" \"$TS\" \"$RESULT_LINE\" \"$PASS\" > \"$LOG_FILE\"; rm -f \"$TMP_FILE\"; exit $STATUS'"
   },
   "dependencies": {
     "next": "16.1.6",

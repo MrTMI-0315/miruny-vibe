@@ -110,6 +110,6 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - 결과 로그: `✓ 1 [chromium] › e2e/done-positive.spec.ts:9:5 › done page renders when finished info exists` / `1 passed (7.3s)`
 
 ### done-positive 공통 증거 스펙 (승인 환경 기준 1회)
-- 통일 템플릿: `Time: <timestamp>`, `Command: npm run e2e -- done-positive.spec.ts`, `Result: <line>`
+- 통일 템플릿(단일 블록): `Time`, `Command`, `Result`, `Pass`
 - 보관 위치(단일): `/tmp/miruny-done-positive-e2e.log`
 - 실행 커맨드(고정): `npm run e2e:done-positive:log`

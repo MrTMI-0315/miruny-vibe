@@ -74,15 +74,19 @@ apps/miruny/
 - Next 템플릿의 `next/font/google` fetch로 오프라인 빌드 실패가 발생해, 외부 폰트 의존성을 제거하고 시스템 폰트 기반으로 전환했습니다.
 - 현재 `npm run build`는 오프라인 환경에서도 통과합니다.
 
-## done-positive E2E 증거
-
-- 실행 일시: `2026-02-13 15:20:26 KST` (`/Users/mrtmi/Desktop/Mr_TMI/repos/miruny`)
-- 명령: `npm run e2e -- done-positive.spec.ts`
-- 샌드박스 재현: 기본 환경 실패 (`EPERM 127.0.0.1:3310`), 승인 실행에서 통과
-- 결과: `✓ ...` `1 passed (7.3s)`
-
 ## done-positive Evidence Convention
 
 - 고정 보관 위치: `/tmp/miruny-done-positive-e2e.log` (항목 1개만 최신 로그 갱신)
-- 고정 템플릿: `Time`, `Command`, `Result` 3줄
+- 고정 템플릿: `Time`, `Command`, `Result`, `Pass` 4줄
 - 권장 실행: `npm run e2e:done-positive:log`
+
+### done-positive E2E 증거
+
+- 실행 일시: `2026-02-13 15:24:43 KST`
+- 통합 커맨드: `npm run e2e:done-positive:log`
+- 샌드박스 재현: 기본 환경에서 `EPERM 127.0.0.1:3310` 가능성, 승인/권한 환경에서 pass 운영
+- 로그 템플릿:
+  - `Time: 2026-02-13 15:24:43 KST`
+  - `Command: npm run e2e -- done-positive.spec.ts`
+  - `Result: 1 passed (3.8s)`
+  - `Pass: PASS`
