@@ -156,11 +156,11 @@ export default function DonePage() {
             <p className="mt-1 text-xs text-zinc-500">스텝</p>
           </article>
           <article className="rounded-[14px] border border-zinc-200 bg-white p-4">
-            <p className="text-xs font-semibold tracking-wide text-zinc-500">focus score</p>
+            <p className="text-xs font-semibold tracking-wide text-zinc-500">집중 점수</p>
             <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
               {focusScoreValue}/100
             </p>
-            <p className="mt-1 text-xs text-zinc-500">상태: {focusScoreTone}</p>
+            <p className="mt-1 text-xs text-zinc-500">{focusScoreTone}</p>
           </article>
         </div>
 
