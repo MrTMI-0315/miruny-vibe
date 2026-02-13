@@ -20,10 +20,9 @@ type ConfettiPiece = {
 const COLORS = ["#f97316", "#fb923c", "#facc15", "#22c55e", "#38bdf8", "#a78bfa"];
 let hasShownConfettiInSession = false;
 
-function createPieces(bursts = 4, perBurst = 16): ConfettiPiece[] {
-  const origins = Array.from({ length: bursts }, (_, index) => {
-    const base = ((index + 1) / (bursts + 1)) * 100;
-    return Math.max(8, Math.min(92, base + (Math.random() * 10 - 5)));
+function createPieces(bursts = 1, perBurst = 10): ConfettiPiece[] {
+  const origins = Array.from({ length: bursts }, () => {
+    return 45 + (Math.random() * 10 - 5);
   });
 
   const pieces: ConfettiPiece[] = [];
@@ -34,16 +33,16 @@ function createPieces(bursts = 4, perBurst = 16): ConfettiPiece[] {
       pieces.push({
         id,
         burstIndex,
-        left: origin + (Math.random() * 16 - 8),
-        size: 5 + Math.random() * 7,
-        duration: 1.2 + Math.random() * 1.3,
-        delay: Math.random() * 0.28,
+        left: origin + (Math.random() * 10 - 5),
+        size: 4 + Math.random() * 5,
+        duration: 1.0 + Math.random() * 0.9,
+        delay: Math.random() * 0.2,
         rotate: Math.random() * 360,
         drift: -90 + Math.random() * 180,
-        rise: 14 + Math.random() * 18,
-        fall: 18 + Math.random() * 24,
+        rise: 10 + Math.random() * 12,
+        fall: 14 + Math.random() * 18,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        opacity: 0.75 + Math.random() * 0.25,
+        opacity: 0.6 + Math.random() * 0.25,
       });
     }
   });
@@ -68,7 +67,7 @@ export function ConfettiBurst() {
       setVisible(true);
       timeoutId = window.setTimeout(() => {
         setVisible(false);
-      }, 1800);
+      }, 1500);
     });
 
     return () => {

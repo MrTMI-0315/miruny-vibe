@@ -87,18 +87,22 @@ export default function DonePage() {
   const focusScoreValue =
     totalStepCount > 0 ? Math.round((completedStepCount / totalStepCount) * 100) : 0;
   const focusScoreText = `${focusScoreValue}/100`;
+  const focusScoreTone =
+    focusScoreValue >= 80
+      ? "좋음"
+      : focusScoreValue >= 60
+        ? "보통"
+        : "개선 필요";
 
   return (
-    <main className="relative min-h-screen bg-zinc-100 px-4 py-8">
+    <main className="min-h-screen bg-zinc-100 px-4 py-8">
       <ConfettiBurst />
 
       <section className="mx-auto w-full max-w-3xl rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 sm:p-8">
         <SessionMetaSlot className="mb-3" />
 
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
-            지금 당장 시작하세요!
-          </h1>
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">지금 당장 시작하세요!</h1>
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -106,7 +110,7 @@ export default function DonePage() {
               onClick={handleExitToLanding}
               className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
             >
-              홈으로
+              처음으로 나가기
             </button>
             <button
               type="button"
@@ -124,15 +128,15 @@ export default function DonePage() {
           <p className="mt-1 text-base font-medium text-zinc-900">{currentRun.taskText}</p>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-orange-200 bg-orange-50/60 px-4 py-6 text-center">
-          <p className="mb-3 inline-flex rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+        <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-6">
+          <p className="inline-flex rounded-full bg-zinc-200/70 px-3 py-1 text-xs font-semibold text-zinc-700">
             완료 요약
           </p>
+          <p className="mt-2 text-xs font-semibold text-emerald-600">완료 상태: 모두 완료</p>
+        </div>
+
+        <div className="mt-4 rounded-2xl border border-zinc-200 bg-white px-4 py-5">
           <DoneRing totalElapsedSec={currentRun.totalElapsedSec} />
-          <p className="mt-4 text-3xl font-black tracking-tight text-zinc-900">
-            {currentRun.totalElapsedSec} 완료!
-          </p>
-          <p className="mt-1 text-sm font-medium text-zinc-600">이번 실행을 끝까지 마쳤어요</p>
         </div>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -155,7 +159,7 @@ export default function DonePage() {
             <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
               {focusScoreText}
             </p>
-            <p className="mt-1 text-xs text-zinc-500">score</p>
+            <p className="mt-1 text-xs text-zinc-500">집중도: {focusScoreTone}</p>
           </article>
         </div>
 

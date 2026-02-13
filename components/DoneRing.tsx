@@ -7,6 +7,7 @@ export function DoneRing({ totalElapsedSec }: DoneRingProps) {
   const strokeWidth = 8;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
+  const durationText = `${totalElapsedSec}s`;
 
   return (
     <div className="relative mx-auto h-[220px] w-[220px]">
@@ -34,7 +35,7 @@ export function DoneRing({ totalElapsedSec }: DoneRingProps) {
         <p className="text-6xl font-black leading-none tabular-nums text-zinc-900">
           {totalElapsedSec}
         </p>
-        <p className="mt-1 text-xs font-medium text-zinc-500">초</p>
+        <p className="text-xs font-semibold text-zinc-500">{durationText}</p>
       </div>
     </div>
   );
