@@ -86,7 +86,6 @@ export default function DonePage() {
   const totalStepCount = currentRun.steps.length;
   const focusScoreValue =
     totalStepCount > 0 ? Math.round((completedStepCount / totalStepCount) * 100) : 0;
-  const focusScoreText = `${focusScoreValue}/100`;
   const focusScoreTone =
     focusScoreValue >= 80
       ? "좋음"
@@ -132,10 +131,14 @@ export default function DonePage() {
           <p className="inline-flex rounded-full bg-zinc-200/70 px-3 py-1 text-xs font-semibold text-zinc-700">
             완료 요약
           </p>
-          <p className="mt-2 text-xs font-semibold text-emerald-600">완료 상태: 모두 완료</p>
+          <p className="mt-2 text-sm font-semibold text-zinc-900">완료 상태</p>
+          <p className="mt-1 text-xs text-zinc-600">모든 단계가 완료되어 요약을 표시했습니다.</p>
         </div>
 
         <div className="mt-4 rounded-2xl border border-zinc-200 bg-white px-4 py-5">
+          <p className="inline-flex rounded-full bg-zinc-100 px-3 py-1 text-[11px] font-semibold text-zinc-700">
+            완료 소요시간
+          </p>
           <DoneRing totalElapsedSec={currentRun.totalElapsedSec} />
         </div>
 
@@ -152,14 +155,14 @@ export default function DonePage() {
             <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
               {completedStepCount}/{totalStepCount}
             </p>
-            <p className="mt-1 text-xs text-zinc-500">완료</p>
+            <p className="mt-1 text-xs text-zinc-500">스텝</p>
           </article>
           <article className="rounded-[14px] border border-zinc-200 bg-white p-4">
             <p className="text-xs font-semibold tracking-wide text-zinc-500">focus score</p>
             <p className="mt-2 text-2xl font-black tabular-nums text-zinc-900">
-              {focusScoreText}
+              {focusScoreValue}
             </p>
-            <p className="mt-1 text-xs text-zinc-500">집중도: {focusScoreTone}</p>
+            <p className="mt-1 text-xs text-zinc-500">점 / {focusScoreTone}</p>
           </article>
         </div>
 
