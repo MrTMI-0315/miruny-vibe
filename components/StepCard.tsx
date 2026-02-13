@@ -22,27 +22,28 @@ export function StepCard({
   const isFinalCurrentStep = isCurrent && isFinalStep;
   const isDoneCard = !isCurrent && isCompleted;
   const isFutureCard = !isCurrent && isDisabled && !isCompleted;
+  const currentSurfaceClass = isCurrent ? "bg-orange-50/60" : "";
 
   return (
     <li
-      className={`flex items-start gap-3 rounded-[14px] border border-zinc-200 p-4 transition sm:items-center ${
+      className={`flex items-start gap-3 rounded-[14px] border border-zinc-200 bg-white p-4 transition sm:items-center ${currentSurfaceClass} ${
         isFinalCurrentStep
           ? "max-[360px]:flex-col max-[360px]:items-stretch max-[360px]:gap-2.5"
           : ""
       } ${
         isCurrent
-          ? "bg-orange-50/70"
+          ? ""
           : isDoneCard
             ? "bg-zinc-50"
             : isFutureCard
-              ? "bg-zinc-50/80 opacity-70"
-              : "bg-zinc-50/80"
+              ? "bg-zinc-50/50"
+              : "bg-white"
       }`}
     >
       <span
         aria-hidden="true"
         className={`mt-0.5 h-10 w-[3px] shrink-0 rounded-full ${
-          isCurrent ? "bg-orange-500" : "bg-transparent"
+          isCurrent ? "bg-orange-500" : "bg-zinc-200"
         }`}
       />
 
@@ -52,7 +53,7 @@ export function StepCard({
         </p>
         <p
           className={`mt-1 text-base leading-6 font-medium ${
-            isDisabled ? "text-zinc-500" : "text-zinc-800"
+            isCurrent ? "text-zinc-900" : isDisabled ? "text-zinc-500" : "text-zinc-800"
           }`}
         >
           {step.title}
