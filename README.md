@@ -73,3 +73,10 @@ apps/miruny/
 
 - Next 템플릿의 `next/font/google` fetch로 오프라인 빌드 실패가 발생해, 외부 폰트 의존성을 제거하고 시스템 폰트 기반으로 전환했습니다.
 - 현재 `npm run build`는 오프라인 환경에서도 통과합니다.
+
+## done-positive E2E 증거
+
+- 실행 일시: `2026-02-13 15:20:26 KST` (`/Users/mrtmi/Desktop/Mr_TMI/repos/miruny`)
+- 명령: `npm run e2e -- done-positive.spec.ts`
+- 샌드박스 재현: 기본 환경 실패 (`EPERM 127.0.0.1:3310`), 승인 실행에서 통과
+- 결과: `✓ ...` `1 passed (7.3s)`

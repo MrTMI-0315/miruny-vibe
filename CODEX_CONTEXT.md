@@ -101,3 +101,10 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - docs 반영 완료: README에 UI Direction 단일 소스 링크 및 플로우/step3 정책 유지 문구 고정
 - E2E 상태: `step3-cta-policy` 스펙을 복사 문구 기반에서 정책 동작 기반으로 보정(로컬 변경)
 - 주의: 현재 워킹트리에 UI 리파인 및 e2e 스펙 변경이 남아 있으므로 다음 액션은 범위별 분리 커밋이 우선
+
+## E2E 증거 아카이브 (done-positive)
+- 실행 일시: `2026-02-13 15:20:26 KST` (`/Users/mrtmi/Desktop/Mr_TMI/repos/miruny`)
+- 대상: `npm run e2e -- done-positive.spec.ts`
+- 우선 실행: 실패(`listen EPERM: operation not permitted 127.0.0.1:3310`) — 샌드박스 바인딩 권한 제약
+- 보완 실행: 승인/리얼 환경에서 `1 passed`로 통과
+- 결과 로그: `✓ 1 [chromium] › e2e/done-positive.spec.ts:9:5 › done page renders when finished info exists` / `1 passed (7.3s)`
