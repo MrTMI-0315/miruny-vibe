@@ -32,6 +32,7 @@ export default function DonePage() {
       }
 
       setCurrentRun(storedRun);
+      window.localStorage.removeItem(CURRENT_RUN_STORAGE_KEY);
       setIsReady(true);
     }, 0);
 
