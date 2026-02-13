@@ -27,12 +27,13 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - 재발 방지: dev 서버는 1개만 유지(새로 띄우기 전 기존 터미널 종료).
 
 ## Recent Work Snapshot
-- `/prepare`: “작업을 분석하고 있어요...” 톤으로 정렬(브랜드 아이콘 + 실제 로딩 인디케이터 + 3초 이동 유지)
-- `/run`: 상태 배지 3단계, step3 CTA 정책(하단 next 대신 카드 완료 유도), StepCard 상세/힌트, TimerRing “초” 중심 표기 반영
-- `/run`: 헤더에 `처음으로 나가기` 추가(세션 폐기 + `/` replace)로 P0 출구 확보
-- `/done`: 헤더에 `홈으로` 추가(세션 폐기 + `/` replace)로 run/done 출구 일관성 확보
-- `/` Landing: 이번 라운드 기준 동작 변경 없음(기존 UX/로직 유지)
-- E2E: `landing-list-add`, `landing-toggle-done`, `landing-delete`, `landing-clear-completed`, `landing-clear-all`, `landing-to-prepare`, `landing-enter-start`, `landing-todo-persist`, `prepare-positive`, `run-exit`, `run-guard-redirect`, `run-restart`, `run-regenerate`, `prepare-guard-redirect`, `run-step-advance`, `step3-cta-policy`, `done-guard-redirect`, `done-positive`, `done-restart`, `done-exit` 스모크 추가
+- UI 문서 고정: `apps/miruny/UI_Direction.md`를 단일 소스로 유지하고 `README.md` + `CODEX_CONTEXT.md`에 링크/로그 연결
+- 토큰 정렬(MT1): `InputCard/TodoList/StepCard/TimerRing/DoneRing`에 spacing/radius/border/focus-visible 문법 일관화(기능/라벨 불변)
+- 라우트 위계(MT3): `/`, `/prepare`, `/run`, `/done`의 primary/secondary CTA 시각 우선순위 정리(플로우/로직 불변)
+- Done 연속성(MB3): `/done`을 `/run` 톤으로 정렬 + metrics placeholder + no-shift confetti overlay 반영
+- Session Slot(MB4): `/`, `/prepare`, `/run`, `/done` 상단에 `SessionMetaSlot` placeholder 추가(표시 전용, 데이터 연동 없음)
+- E2E 확장: `landing-enter-start`, `landing-todo-persist` 포함 스모크 세트 유지, 전체 20개 기준 회귀 실행 가능 상태
+- 최신 E2E 보정(로컬): `e2e/step3-cta-policy.spec.ts`를 문구 의존에서 상태/행동 기반 검증으로 변경, `npm run e2e` 20 passed 확인
 
 ## Operational Rules (Non-Negotiables)
 - 최소 변경/최대 체감 원칙
@@ -72,26 +73,11 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - 3) 새 세션을 열어 다음 태스크를 진행한다.
 - 새 세션 시작 시 근거 문서는 `CODEX_CONTEXT.md`만 사용하며, 이전 대화 맥락에 의존하지 않는다.
 
-## Next Task: MB3 (Done Visual Continuity)
-### Goal
-`/done` 화면을 `/run`과 시각적으로 연속되게 정렬하고, 완료 순간의 피드백(링/배지/confetti)을 레퍼런스 톤으로 다듬는다.
-
-### Allowed Files
-- `app/done/page.tsx`
-- `components/DoneRing.tsx`
-- `components/ConfettiBurst.tsx`
-
-### Forbidden
-- `/run`, `/prepare`, `/` 파일 수정 금지
-- `globals.css`, `lib/*` 수정 금지
-- 신규 deps 금지
-
-### Acceptance Criteria
-- `/done`에서 완료 요약 가독성 강화(핵심 수치 + 상태 문구)
-- `/run`과 톤이 자연스럽게 이어지도록 상단/카드 계열 시각 정렬
-- confetti가 과하거나 부족하지 않게 1회 연출
-- `1단계부터 다시 시작` 동작은 기존과 동일
-- `npm test` 통과
+## Current Pending Worktree Snapshot
+- 미커밋 변경 파일: `apps/miruny/UI_Direction.md`, `components/InputCard.tsx`, `components/TodoList.tsx`, `components/StepCard.tsx`, `components/TimerRing.tsx`, `components/DoneRing.tsx`, `e2e/step3-cta-policy.spec.ts`
+- 성격 분류: UI 시각 리파인 잔여분(컴포넌트 5개+문서 1개) + E2E 정책 보정 1개
+- 정리 원칙: `git add .` 금지, 범위별 선택 스테이징/커밋 유지
+- 품질 증거(최신): `npm test` exit 0, `npm run e2e` exit 0(20 passed)
 
 ## Fixed Report Format
 - 1) 요약
@@ -108,3 +94,10 @@ MIRUNY는 “바로 시작”을 돕는 3단계 실행 플로우 앱으로, 할 
 - 관련 커밋: `496b981` (`feat(ui): add done metrics placeholders and no-shift confetti`)
 - 관련 커밋: `2897211` (`refactor(ui): apply token system to core components`), `a2a9518` (`docs: add miruny UI direction and token guide`)
 - TODO: e2e 보정(`landing-enter-start`, `landing-todo-persist`, `step3-cta-policy`)은 stash 기준으로 별도 커밋 분리
+
+## Session Update Log (2026-02-13 KST)
+- 기준 브랜치: `main` (`origin/main` 추적), 최근 반영 커밋: `ff21d92`, `4a1f029`, `a2a9518`, `2897211`
+- MB4 반영 완료: Session Meta Slot placeholder를 4개 라우트에 시각-only로 도입
+- docs 반영 완료: README에 UI Direction 단일 소스 링크 및 플로우/step3 정책 유지 문구 고정
+- E2E 상태: `step3-cta-policy` 스펙을 복사 문구 기반에서 정책 동작 기반으로 보정(로컬 변경)
+- 주의: 현재 워킹트리에 UI 리파인 및 e2e 스펙 변경이 남아 있으므로 다음 액션은 범위별 분리 커밋이 우선
