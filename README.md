@@ -65,8 +65,8 @@ apps/miruny/
 
 ## MIRUNY 문서
 
-- UI System / Direction: `apps/miruny/UI_Direction.md`
-- 위 문서는 토큰/라우트별 지시사항/다음 UI 태스크의 단일 소스(SSOT)입니다.
+- UI Redesign PRD v0.2(SSOT): `apps/miruny/UI_Direction.md`
+- 문서에는 라우트별 토큰/액션 원칙 및 다음 UI 태스크 기준이 정리되어 있습니다.
 - 핵심 플로우(`/ -> /prepare -> /run -> /done`)와 `/run` step3 단일 진행 정책(하단 CTA 비활성, 카드 완료 진입)은 유지합니다.
 
 ## 개발 중 이슈 메모
