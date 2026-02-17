@@ -14,5 +14,7 @@ test("landing input starts flow and enters /prepare", async ({ page }) => {
 
   await page.waitForURL("**/prepare");
   await expect(page).toHaveURL(/\/prepare$/);
-  await expect(page.getByText("작업을 분석하고 있어요...", { exact: false })).toBeVisible();
+  await expect(
+    page.getByText(/3단계로 쪼개는 중…|작업을 분석하고 있어요...|이제 실행 준비 중.../),
+  ).toBeVisible();
 });
