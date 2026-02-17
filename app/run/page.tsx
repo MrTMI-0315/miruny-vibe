@@ -193,7 +193,7 @@ export default function RunPage() {
 
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-bold tracking-tight text-zinc-900">
-            지금 당장 시작하세요!
+            지금 시작하세요
           </h1>
           <div className="flex items-center gap-4">
           <button
@@ -202,7 +202,7 @@ export default function RunPage() {
             aria-label="처음으로 나가기"
             className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
           >
-            처음으로 나가기
+            홈으로
           </button>
           <button
             type="button"
@@ -210,7 +210,7 @@ export default function RunPage() {
             aria-label="단계 다시 생성하기"
             className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
           >
-            다시 생성하기
+            미션 다시 구성
           </button>
           </div>
         </div>
@@ -227,7 +227,7 @@ export default function RunPage() {
             progressRatio={progressRatio}
           />
           {remainingSec <= 3 && (
-            <p className="mt-3 text-center text-sm font-bold text-orange-600">서두르세요!</p>
+            <p className="mt-3 text-center text-sm font-medium text-zinc-600">잠깐만 더, 20초만 해볼까요?</p>
           )}
         </div>
 
@@ -252,7 +252,7 @@ export default function RunPage() {
                 : "bg-orange-500 text-white hover:bg-orange-600 active:bg-orange-700"
             }`}
           >
-            {isFinalStep ? "마지막 단계는 카드 완료만" : "다음 단계로 →"}
+            {isFinalStep ? "마지막 단계는 카드 완료만" : "이 단계 완료"}
           </button>
         </div>
 

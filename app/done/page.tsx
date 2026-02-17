@@ -101,7 +101,7 @@ export default function DonePage() {
         <SessionMetaSlot className="mb-3" />
 
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">지금 당장 시작하세요!</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">잘 마쳤어요</h1>
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -109,7 +109,7 @@ export default function DonePage() {
               onClick={handleExitToLanding}
               className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
             >
-              처음으로 나가기
+              다시 시작하기
             </button>
             <button
               type="button"
@@ -117,7 +117,7 @@ export default function DonePage() {
               onClick={handleRestart}
               className="text-sm font-semibold text-zinc-500 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 focus-visible:ring-offset-2"
             >
-              다시 생성하기
+              같은 미션 다시 하기
             </button>
           </div>
         </div>
@@ -131,8 +131,7 @@ export default function DonePage() {
           <p className="inline-flex rounded-full bg-zinc-200/70 px-3 py-1 text-xs font-semibold text-zinc-700">
             완료 요약
           </p>
-          <p className="mt-2 text-sm font-semibold text-zinc-900">완료 상태</p>
-          <p className="mt-1 text-xs text-zinc-600">모든 단계 완료</p>
+          <p className="mt-2 text-sm font-semibold text-zinc-900">지금 세션은 마무리됐어요</p>
         </div>
 
         <div className="mt-4 rounded-2xl border border-zinc-200 bg-white px-4 py-5">
