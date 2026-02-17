@@ -21,6 +21,7 @@ function createTask(text: string): Task {
 export default function HomePage() {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
+  const [inputError, setInputError] = useState(false);
   const [tasks, setTasks] = useState<Task[]>(() => loadTasks());
 
   const canSubmit = useMemo(() => inputValue.trim().length > 0, [inputValue]);
@@ -33,26 +34,22 @@ export default function HomePage() {
     const trimmed = inputValue.trim();
 
     if (!trimmed) {
+      setInputError(true);
       return null;
     }
 
     const newTask = createTask(trimmed);
+    setInputError(false);
     setTasks((prevTasks) => [newTask, ...prevTasks]);
     setInputValue("");
     return newTask;
   };
 
-  const handleStartNow = () => {
-    const task = addTaskFromInput();
-
-    if (!task) {
-      return;
-    }
-
+  const startRunWithTask = (taskText: string) => {
     const now = Date.now();
     const currentRun: CurrentRun = {
-      taskText: task.text,
-      steps: createThreeSteps(task.text),
+      taskText,
+      steps: createThreeSteps(taskText),
       currentStepIndex: 0,
       stepStartedAt: now,
       totalStartedAt: now,
@@ -61,6 +58,28 @@ export default function HomePage() {
 
     saveCurrentRun(currentRun);
     router.push("/prepare");
+  };
+
+  const handleStartNow = () => {
+    const task = addTaskFromInput();
+
+    if (!task) {
+      setInputError(true);
+      return;
+    }
+
+    startRunWithTask(task.text);
+  };
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    if (inputError) {
+      setInputError(false);
+    }
+  };
+
+  const handleInvalidSubmit = () => {
+    setInputError(true);
   };
 
   return (
@@ -72,15 +91,21 @@ export default function HomePage() {
           <InputCard
             value={inputValue}
             canSubmit={canSubmit}
-            onChange={setInputValue}
+            onChange={handleInputChange}
             onAddToList={addTaskFromInput}
             onStartNow={handleStartNow}
+            onInvalidSubmit={handleInvalidSubmit}
+            showInputError={inputError}
           />
         </section>
 
         <section className="rounded-[18px] border border-zinc-200 bg-zinc-50 p-4 sm:p-6">
           <TodoList
             tasks={tasks}
+            onStartFromList={(taskText) => {
+              setInputError(false);
+              startRunWithTask(taskText);
+            }}
             onToggle={(id) => {
               setTasks((prevTasks) =>
                 prevTasks.map((task) =>

@@ -4,6 +4,8 @@ type InputCardProps = {
   onChange: (value: string) => void;
   onAddToList: () => void;
   onStartNow: () => void;
+  onInvalidSubmit?: () => void;
+  showInputError?: boolean;
 };
 
 export function InputCard({
@@ -12,6 +14,8 @@ export function InputCard({
   onChange,
   onAddToList,
   onStartNow,
+  onInvalidSubmit,
+  showInputError,
 }: InputCardProps) {
   return (
     <section>
@@ -44,7 +48,24 @@ export function InputCard({
           onChange={(event) => onChange(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              onStartNow();
+              event.preventDefault();
+
+              if (event.shiftKey) {
+                if (canSubmit) {
+                  onAddToList();
+                  return;
+                }
+
+                onInvalidSubmit?.();
+                return;
+              }
+
+              if (canSubmit) {
+                onStartNow();
+                return;
+              }
+
+              onInvalidSubmit?.();
             }
           }}
           placeholder="예: 밀린 강의 자료 정리하기"
@@ -71,7 +92,7 @@ export function InputCard({
         </div>
 
         <p className="pt-6 text-center text-sm text-zinc-700">
-          Enter 키를 눌러 바로 시작하세요
+          {showInputError ? "한 가지를 적어주세요" : "Enter=바로 시작, Shift+Enter=목록 추가"}
         </p>
       </div>
     </section>
